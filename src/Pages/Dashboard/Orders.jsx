@@ -8,6 +8,7 @@ import {
   Modal,
   Tag,
   Descriptions,
+  Pagination,
 } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import {
@@ -25,9 +26,16 @@ const RunningOrders = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 1000,
+  });
   const [updateStatus, { isLoading: isUpdating }] =
     useOrderStatusChangeMutation();
-  const { data, isLoading, refetch } = useOrdersQuery();
+  const { data, isLoading } = useOrdersQuery({
+    page: pagination.current,
+    limit: pagination.pageSize,
+  });
 
   // Ensure orders data is properly extracted
 
@@ -38,6 +46,7 @@ const RunningOrders = () => {
   }
 
   const orders = data?.data?.data || [];
+  const paginationData = data?.data?.pagination || {};
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -202,7 +211,13 @@ const RunningOrders = () => {
           </Select>
         </Space>
       </div>
-      <Table columns={columns} dataSource={filteredData} rowKey="_id" />
+      <Table
+        columns={columns}
+        dataSource={filteredData}
+        rowKey="_id"
+        pagination={paginationData}
+      />
+
       <Modal
         title={
           <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>

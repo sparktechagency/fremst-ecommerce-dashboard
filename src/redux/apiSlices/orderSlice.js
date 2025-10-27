@@ -3,10 +3,10 @@ import { api } from "../api/baseApi";
 const orderSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     orders: builder.query({
-      query: () => {
+      query: ({ page, limit }) => {
         return {
           method: "GET",
-          url: "/order",
+          url: `order?page=${page}&limit=${limit}`,
         };
       },
       providesTags: ["Order"],
