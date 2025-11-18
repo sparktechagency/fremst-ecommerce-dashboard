@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 // Enhanced base query to handle token refresh
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
-    baseUrl: "http://164.90.205.5:5001/api/v1",
+    baseUrl: "https://www.api.fremst.nu/api/v1",
     // baseUrl: "http://10.10.7.26:5010/api/v1",
     prepareHeaders: (headers) => {
       const token =
