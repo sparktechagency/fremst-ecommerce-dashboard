@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import JoditEditor from "jodit-react";
 import Title from "../../components/common/Title";
 import {
@@ -6,7 +6,7 @@ import {
   useUpdateTermsAndConditionsMutation,
 } from "../../redux/apiSlices/termsAndConditionSlice";
 import toast from "react-hot-toast";
-import rentMeLogo from "../../assets/logo.png";
+import { Spin } from "antd";
 
 const TermsAndCondition = () => {
   const editor = useRef(null);
@@ -26,12 +26,10 @@ const TermsAndCondition = () => {
     setContent(termsAndConditionData);
   }, [termsAndConditionData]);
 
-  console.log(termsAndConditionData);
-
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={rentMeLogo} alt="" />
+        <Spin />
       </div>
     );
   }

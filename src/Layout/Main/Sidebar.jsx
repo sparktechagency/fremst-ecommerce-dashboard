@@ -1,11 +1,11 @@
 import { Menu } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MdAddShoppingCart,
-  MdCancelPresentation,
   MdCategory,
   MdFeaturedPlayList,
   MdOutlineAddBox,
+  MdOutlineCreateNewFolder,
   MdOutlineProductionQuantityLimits,
 } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -16,8 +16,8 @@ import Cookies from "js-cookie";
 import logo from "../../assets/logoTransBg.png";
 import { FaBorderStyle, FaThList } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
-import { FaTags } from "react-icons/fa6";
 import { BsBorderStyle } from "react-icons/bs";
+import { jwtDecode } from "jwt-decode";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -38,8 +38,10 @@ const Sidebar = () => {
   };
 
   // Get user role from local/session storage
-  const userRole =
-    localStorage.getItem("role") || sessionStorage.getItem("role");
+  const token =
+    localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+  const decodedToken = jwtDecode(token);
+  const userRole = decodedToken?.role;
 
   // Define menu items for different roles
   const adminMenuItems = [
@@ -78,6 +80,11 @@ const Sidebar = () => {
       key: "/orders",
       icon: <FaBorderStyle size={24} />,
       label: <Link to="/orders">Orders</Link>,
+    },
+    {
+      key: "/create-order",
+      icon: <MdOutlineCreateNewFolder size={24} />,
+      label: <Link to="/create-order">Create Order</Link>,
     },
     {
       key: "categoryMenu",
@@ -181,6 +188,11 @@ const Sidebar = () => {
       label: <Link to="/company-orders">Orders</Link>,
     },
     {
+      key: "/create-order",
+      icon: <MdOutlineCreateNewFolder size={24} />,
+      label: <Link to="/create-order">Create Order</Link>,
+    },
+    {
       key: "subMenuSetting",
       icon: <IoSettingsOutline size={24} />,
       label: "Settings",
@@ -219,7 +231,6 @@ const Sidebar = () => {
     if (userRole === "company") {
       return companyMenuItems;
     }
-    // For "admin" and "superadmin", return adminMenuItems
     return adminMenuItems;
   };
 

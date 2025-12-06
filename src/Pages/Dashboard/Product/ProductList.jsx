@@ -76,6 +76,12 @@ const ProductList = () => {
       ),
     },
     {
+      title: "Stock Left",
+      dataIndex: "stockLeft",
+      key: "stockLeft",
+      render: (text, record) => <p>{record?.quantity || "-"}</p>,
+    },
+    {
       title: "Status",
       dataIndex: "availability",
       key: "availability",
@@ -149,6 +155,7 @@ const ProductList = () => {
       </div>
       <Table
         columns={columns}
+        rowKey="_id"
         dataSource={filteredProducts}
         pagination={{ pageSize: 10 }}
         scroll={{ x: 1000 }}

@@ -22,8 +22,6 @@ const AddCategory = () => {
 
   const categories = data?.data || [];
 
-  console.log(categories);
-
   useEffect(() => {
     // When a category is selected for editing, set the form values.
     if (selectedCategory) {

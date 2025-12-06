@@ -32,8 +32,6 @@ const ManageSingleCompanyPrices = () => {
   const availableProducts = company?.availableProducts || [];
   const companyProducts = getCompanyProducts?.data || [];
 
-  console.log(companyProducts);
-
   useEffect(() => {
     if (availableProducts.length) {
       const selectedMap = availableProducts.reduce((acc, productId) => {

@@ -60,6 +60,16 @@ const orderSlice = api.injectEndpoints({
       },
       providesTags: ["Order"],
     }),
+
+
+    createOrder: builder.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/order/admin-company",
+        body,
+      }),
+      invalidatesTags: ["Order"],
+    }),
   }),
 });
 
@@ -70,4 +80,5 @@ export const {
   useGetOrderStatsForUserQuery,
   useGetEmployeeOrdersHistoryQuery,
   useGetCompanyOrdersHistoryQuery,
+  useCreateOrderMutation,
 } = orderSlice;

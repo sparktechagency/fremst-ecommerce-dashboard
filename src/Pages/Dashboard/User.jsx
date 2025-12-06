@@ -13,7 +13,6 @@ import {
 } from "../../redux/apiSlices/userSlice";
 import moment from "moment";
 import Currency from "../../utils/Currency";
-import logo from "../../assets/logo.png";
 import { imageUrl } from "../../redux/api/baseApi";
 
 const User = () => {
@@ -34,8 +33,6 @@ const User = () => {
 
   const companyData = companyById?.data || {};
   const employeesData = companyEmployees?.data?.data || [];
-
-  console.log(companyData);
 
   const imgUrl =
     companyData?.user?.profile ||

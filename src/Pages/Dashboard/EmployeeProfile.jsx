@@ -1,17 +1,14 @@
 import { useState } from "react";
-
-import profileImg from "../../assets/randomProfile4.jpg";
-import profileImage from "../../assets/randomProfile.png";
 import profileBanner from "../../assets/profileBanner.png";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { PiSuitcaseSimple } from "react-icons/pi";
-import { FaEye, FaRegBuilding } from "react-icons/fa6";
+import { FaRegBuilding } from "react-icons/fa6";
 import {
   MdOutlineEmail,
   MdOutlineLocalPhone,
   MdOutlineLocationOn,
 } from "react-icons/md";
-import { Button, Input, Select, Table, Tooltip } from "antd";
+import { Button, Input, Select, Spin, Table, Tooltip } from "antd";
 import moment from "moment";
 import { TbShoppingCartCheck } from "react-icons/tb";
 import { IoIosCalculator } from "react-icons/io";
@@ -37,15 +34,13 @@ const EmployeeProfile = () => {
   if (isFetching || isFetchingOrders) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={logo} alt="" />
+        <Spin />
       </div>
     );
   }
 
   const employeeData = getEmployeeData?.data || [];
   const orderHistory = getEmployeeOrders?.data?.data || [];
-
-  console.log(employeeData);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);

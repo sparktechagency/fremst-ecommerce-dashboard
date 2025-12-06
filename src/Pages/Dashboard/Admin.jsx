@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space, Alert, Modal } from "antd";
+import { Table, Input, Button, Space, Alert, Modal, Spin } from "antd";
 import React, { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import CreateAdmin from "../../components/ui/Admin/CreateAdmin";
@@ -16,8 +16,15 @@ const Admin = () => {
   const [deleteAdmin, { isLoading }] = useDeleteAdminMutation();
   const { data, isFetching } = useGetAllAdminsQuery();
 
+  if (isLoading || isFetching) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
+
   const admins = data?.data || [];
-  console.log(admins);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -150,7 +157,7 @@ const Admin = () => {
         columns={columns}
         dataSource={filteredData}
         pagination={false}
-        rowKey="key"
+        rowKey="_id"
       />
       <CreateAdmin open={open} setOpen={setOpen} />
     </div>

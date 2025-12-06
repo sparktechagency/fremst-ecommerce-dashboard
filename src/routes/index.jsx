@@ -29,6 +29,8 @@ import AddOrEditProduct from "../Pages/Dashboard/Product/AddOrEditProduct";
 import CompanyOrderPage from "../Pages/Dashboard/CompanyOrderPage";
 import ManageSingleCompanyPrices from "../Pages/Dashboard/ManageSingleCompanyPrices";
 import CompanyProduct from "../Pages/Dashboard/CompanyProduct";
+import CreateOrderMain from "../Pages/CreateOrderPage/CreateOrderMain";
+import EmployeesByCompany from "../Pages/CreateOrderPage/EmployeesByCompany";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +118,14 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "create-order",
+        element: <CreateOrderMain />,
+      },
+      {
+        path: "/employees/:id",
+        element: <EmployeesByCompany />,
       },
       {
         path: "/company-orders",

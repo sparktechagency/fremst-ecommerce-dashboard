@@ -14,7 +14,6 @@ const Login = () => {
 
   const onFinish = async (values) => {
     try {
-      console.log(values);
       const response = await login(values).unwrap();
       const { accessToken } = response?.data;
       const { refreshToken } = response?.data;
