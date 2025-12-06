@@ -1,7 +1,5 @@
-import { Button, Form, Input } from "antd";
-import React, { useState } from "react";
-import rentMeLogo from "../../assets/logo.png";
-
+import { Button, Form, Input, Spin } from "antd";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useChangePasswordMutation } from "../../redux/apiSlices/authSlice";
 
@@ -17,7 +15,7 @@ const ChangePassword = () => {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={rentMeLogo} alt="" />
+        <Spin />
       </div>
     );
   }

@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { GoQuestion } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
 import FaqModal from "../../ui/FAQ/FaqModal";
 import {
-  useCreateFaqMutation,
   useDeleteFaqMutation,
   useGetFaqQuery,
-  useUpdateFaqMutation,
 } from "../../../redux/apiSlices/privacyPolicySlice";
 import toast from "react-hot-toast";
-import logo from "../../../assets/logo.png";
+import { Spin } from "antd";
 
 const Faq = () => {
   const [openAddModel, setOpenAddModel] = useState(false);
@@ -23,12 +21,12 @@ const Faq = () => {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={logo} alt="" />
+        <Spin />
       </div>
     );
   }
   const faqData = getFaqData?.data || [];
-  console.log(faqData);
+  // console.log(faqData);
 
   const handleDelete = async (id) => {
     try {
@@ -57,7 +55,7 @@ const Faq = () => {
             key={index}
             className="flex justify-between items-start gap-4 py-4 px-4 rounded-lg bg-white mb-3"
           >
-            <GoQuestion color="#8b0000" size={25} className="mt-3" />
+            <GoQuestion color="#00809E" size={25} className="mt-3" />
             <div className="flex-1">
               <p className="text-base font-medium rounded-xl py-2 px-4 flex items-center gap-8">
                 <span className="flex-1">{item?.question}</span>

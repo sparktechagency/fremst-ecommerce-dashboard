@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
@@ -46,14 +46,6 @@ const PersonalInfo = () => {
     }
   }, [form, data]);
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <img src={rentMeLogo} alt="" />
-      </div>
-    );
-  }
-
   const onChangeImage = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -92,7 +84,7 @@ const PersonalInfo = () => {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={logo2} alt="" />
+        <Spin />
       </div>
     );
   }

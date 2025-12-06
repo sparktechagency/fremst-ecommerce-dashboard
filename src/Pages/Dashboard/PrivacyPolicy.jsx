@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import JoditEditor from "jodit-react";
 import Title from "../../components/common/Title";
-import rentMeLogo from "../../assets/logo.png";
 import toast from "react-hot-toast";
 import {
   usePrivacyPolicyQuery,
   useUpdatePricyPolicyMutation,
 } from "../../redux/apiSlices/privacyPolicySlice";
+import { Spin } from "antd";
 
 const PrivacyPolicy = () => {
   const editor = useRef(null);
@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <img src={rentMeLogo} alt="" />
+        <Spin />
       </div>
     );
   }
