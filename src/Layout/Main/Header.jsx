@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegBell } from "react-icons/fa6";
-import { Badge, Select } from "antd";
+import { Badge } from "antd";
 import logo from "../../assets/randomProfile2.jpg";
 import { useFetchUserProfileQuery } from "../../redux/apiSlices/authSlice";
 import { io } from "socket.io-client";
 import { imageUrl } from "../../redux/api/baseApi";
-
-const { Option } = Select;
 
 const Header = () => {
   const { data: profileData, isLoading, refetch } = useFetchUserProfileQuery();
@@ -25,7 +23,9 @@ const Header = () => {
   useEffect(() => {
     const socket = io("http://164.90.205.5:5001", {
       query: {
-        token: localStorage.getItem("authToken"),
+        token:
+          localStorage.getItem("authToken") ||
+          sessionStorage.getItem("authToken"),
       },
     });
     socket.on("notification::asd98234!3454@", (notification) => {
@@ -44,40 +44,6 @@ const Header = () => {
 
   return (
     <div className="flex items-center justify-end gap-7 h-full">
-      {/* Language Selector */}
-      {/* <Select
-        defaultValue={"en"} // Use the current language
-        style={{ width: 120, height: "50px" }}
-        onChange={handleSelectLanguage}
-      >
-        <Option value="en">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "40px" }}
-          >
-            <img
-              src="https://cdn.britannica.com/29/22529-004-ED1907BE/Union-Flag-Cross-St-Andrew-of-George.jpg"
-              alt="English Flag"
-              style={{ marginRight: 8, width: 16, height: 16 }}
-            />
-            English
-          </div>
-        </Option>
-        <Option value="sw">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "40px" }}
-          >
-            <img
-              src="/flag.png"
-              alt="Swedish Flag"
-              style={{ marginRight: 8, width: 16, height: 16 }}
-            />
-            Swedish
-          </div>
-        </Option>
-      </Select> */}
-
-      {/* <LanguageSwitcher /> */}
-
       {profile?.role === "admin" || profile?.role === "super-admin" ? (
         <div>
           <Link to="/notification">

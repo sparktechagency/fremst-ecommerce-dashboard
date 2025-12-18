@@ -39,12 +39,6 @@ const RunningOrders = () => {
 
   // Ensure orders data is properly extracted
 
-  if (isLoading) {
-    <div className="flex min-h-screen items-center justify-center">
-      <Image src={logo} alt="logo" />
-    </div>;
-  }
-
   const orders = data?.data?.data || [];
   const paginationData = data?.data?.pagination || {};
 
@@ -216,6 +210,7 @@ const RunningOrders = () => {
         dataSource={filteredData}
         rowKey="_id"
         pagination={paginationData}
+        loading={isLoading}
       />
 
       <Modal

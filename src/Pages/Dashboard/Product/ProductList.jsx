@@ -17,7 +17,7 @@ const ProductList = () => {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
-  const { data, isLoading, refetch } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery();
 
   const products = data?.data || [];
 
@@ -159,6 +159,7 @@ const ProductList = () => {
         dataSource={filteredProducts}
         pagination={{ pageSize: 10 }}
         scroll={{ x: 1000 }}
+        loading={isLoading}
       />
     </div>
   );
