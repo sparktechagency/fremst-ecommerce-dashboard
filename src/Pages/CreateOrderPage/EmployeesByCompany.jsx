@@ -9,8 +9,11 @@ const EmployeesByCompany = ({ companyId }) => {
   const { id: routeId } = useParams();
   const id = companyId ?? routeId;
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
   const { data: getEmployeesByCompany, isLoading } =
-    useGetEmployeesByCompanyQuery(id);
+    useGetEmployeesByCompanyQuery({ id, page: currentPage, limit: pageSize });
 
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -108,9 +111,13 @@ const EmployeesByCompany = ({ companyId }) => {
         dataSource={employees}
         rowKey="_id"
         pagination={{
-          current: meta.page,
-          pageSize: meta.limit,
+          current: currentPage,
+          pageSize: pageSize,
           total: meta.total,
+          onChange: (page, size) => {
+            setCurrentPage(page);
+            setPageSize(size);
+          },
         }}
       />
 

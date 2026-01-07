@@ -29,11 +29,17 @@ const userSlice = api.injectEndpoints({
       providesTags: ["Company"],
     }),
     getEmployeesByCompany: builder.query({
-      query: (companyId) => {
+      query: (arg) => {
+        const companyId = typeof arg === "object" ? arg.id : arg;
+        const params = { companyId };
+        if (typeof arg === "object") {
+          if (arg.page) params.page = arg.page;
+          if (arg.limit) params.limit = arg.limit;
+        }
         return {
           method: "GET",
           url: `/admin/employees/`,
-          params: { companyId },
+          params: params,
         };
       },
       providesTags: ["Employee"],
